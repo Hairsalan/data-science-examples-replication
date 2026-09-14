@@ -1,0 +1,14 @@
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch>=2.6.0
+
+tokenizers>=0.20
+huggingface_hub>=0.25
+numpy>=1.26
+pyyaml>=6.0
+tqdm>=4.66
+requests>=2.32
+
+streamlit>=1.38
+plotly>=5.24
+pandas>=2.2
+psutil>=6.0
