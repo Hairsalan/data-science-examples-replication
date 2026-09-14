@@ -1,5 +1,8 @@
 # NYC Taxi Trip & Fare Intelligence
 
+Youtube link:
+https://www.youtube.com/watch?v=k4Z_Xjaykvs
+
 End-to-end machine learning application, built around the Kaggle NYC Taxi challenge dataset, that predicts trip **duration** and **fare** from pickup/dropoff coordinates and trip time. Built following the **CRISP-DM** methodology, served via a **FastAPI** backend, and fronted by an interactive **Leaflet.js** map + estimator dashboard.
 
 ## Quick start
