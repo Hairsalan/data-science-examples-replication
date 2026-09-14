@@ -1,0 +1,46 @@
+{
+  "fare_prediction": {
+    "baseline": {
+      "rmse": 7.2456,
+      "rmsle": 0.2721,
+      "mae": 2.6694,
+      "r2_score": 0.3951,
+      "within_2_dollars_pct": 63.54,
+      "within_5_dollars_pct": 88.68
+    },
+    "lightgbm": {
+      "rmse": 3.5162,
+      "rmsle": 0.2126,
+      "mae": 1.8211,
+      "r2_score": 0.8575,
+      "within_2_dollars_pct": 74.55,
+      "within_5_dollars_pct": 93.2
+    },
+    "improvement_pct": {
+      "rmse_reduction": 51.47,
+      "mae_reduction": 31.78
+    }
+  },
+  "trip_duration_prediction": {
+    "baseline": {
+      "rmse": 173.8749,
+      "rmsle": 0.2648,
+      "mae": 91.6075,
+      "r2_score": 0.5945,
+      "within_2_mins_pct": 79.0,
+      "within_5_mins_pct": 95.9
+    },
+    "lightgbm": {
+      "rmse": 81.825,
+      "rmsle": 0.1508,
+      "mae": 55.2578,
+      "r2_score": 0.9102,
+      "within_2_mins_pct": 90.05,
+      "within_5_mins_pct": 99.13
+    },
+    "improvement_pct": {
+      "rmse_reduction": 52.94,
+      "mae_reduction": 39.68
+    }
+  }
+}

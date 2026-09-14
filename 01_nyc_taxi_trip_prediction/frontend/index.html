@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NYC Taxi Trip & Fare Intelligence | CRISP-DM Production ML</title>
+  
+  <!-- Fonts & Leaflet CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="header-container">
+      <div class="brand">
+        <div class="taxi-icon">NYC</div>
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="brand-title">Taxi Intelligence</span>
+            <span class="brand-badge">CRISP-DM</span>
+          </div>
+          <p style="font-size: 0.72rem; color: var(--text-secondary);">End-to-End Kaggle Trip Duration & Fare Prediction</p>
+        </div>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="nav-btn active" data-tab="map">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+          Interactive Estimator
+        </button>
+        <button class="nav-btn" data-tab="crisp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          CRISP-DM & Analytics
+        </button>
+      </nav>
+
+      <div class="status-indicator">
+        <div class="pulse-dot"></div>
+        <span>LightGBM Serving</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main>
+
+    <!-- TAB 1: Interactive Estimator & Map View -->
+    <section id="map-view" class="view-section active">
+      <div class="grid-container">
+
+        <!-- Controls & Prediction Sidebar -->
+        <div class="sidebar">
+
+          <!-- Presets Card -->
+          <div class="card">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+              Popular NYC Route Presets
+            </div>
+            <div id="preset-chips" class="preset-chips">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Trip Parameters Card -->
+          <div class="card">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              Trip Configuration
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="pickup-datetime">Pickup Date & Time</label>
+                <input type="datetime-local" id="pickup-datetime" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label for="passenger-count">Passengers (1-6)</label>
+                <input type="number" id="passenger-count" class="form-input" min="1" max="6" value="1" />
+              </div>
+            </div>
+            <button id="estimate-btn" class="btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+              Recalculate Estimate
+            </button>
+          </div>
+
+          <!-- Estimation Results Card -->
+          <div class="card results-container">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              ML Trip & Fare Estimate
+            </div>
+
+            <div class="primary-metrics">
+              <div class="metric-box fare">
+                <div class="metric-label">Estimated Fare</div>
+                <div id="fare-value" class="metric-value">$0.00</div>
+                <div class="metric-sub">TLC Rate Standard</div>
+              </div>
+              <div class="metric-box duration">
+                <div class="metric-label">Estimated Time</div>
+                <div id="duration-value" class="metric-value">0 min</div>
+                <div class="metric-sub">Traffic-Adjusted</div>
+              </div>
+            </div>
+
+            <!-- Route & Traffic Details -->
+            <div class="details-list">
+              <div class="detail-row">
+                <span class="detail-label">Route Distance</span>
+                <span class="detail-val"><span id="distance-miles">--</span> (<span id="distance-km">--</span>)</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Average Speed</span>
+                <span id="speed-mph" class="detail-val">-- mph</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Traffic Condition</span>
+                <span id="congestion-badge" class="badge-tag congestion-light">Evaluating...</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Rush Hour Window</span>
+                <span id="is-rush-hour" class="detail-val">--</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Overnight Window</span>
+                <span id="is-overnight" class="detail-val">--</span>
+              </div>
+            </div>
+
+            <!-- Fare Breakdown Accordion/Card -->
+            <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-size: 0.75rem; font-weight: 700; color: #fff; margin-bottom: 0.35rem;">Fare Breakdown & Tips</div>
+              <div class="detail-row" style="font-size: 0.75rem;">
+                <span class="detail-label">Base Flag Drop</span>
+                <span id="breakdown-base" class="detail-val">$3.00</span>
+              </div>
+              <div class="detail-row" style="font-size: 0.75rem;">
+                <span class="detail-label">Distance Meter</span>
+                <span id="breakdown-distance" class="detail-val">$0.00</span>
+              </div>
+              <div class="detail-row" style="font-size: 0.75rem;">
+                <span class="detail-label">TLC / Congestion Surcharges</span>
+                <span id="breakdown-surcharges" class="detail-val">$0.00</span>
+              </div>
+              <div class="detail-row" style="font-size: 0.75rem;">
+                <span class="detail-label">Suggested Tip (15% / 20%)</span>
+                <span class="detail-val"><span id="tip-15" style="color:#60a5fa;">--</span> / <span id="tip-20" style="color:#34d399;">--</span></span>
+              </div>
+            </div>
+
+            <!-- Model Benchmark Comparison -->
+            <div class="comparison-banner">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 700; color: #93c5fd;">Baseline Model Benchmark:</span>
+                <span style="font-size: 0.65rem; color: #9ca3af;">Ridge Linear</span>
+              </div>
+              <div class="comp-grid">
+                <div class="comp-item">Baseline Fare: <strong id="comp-base-fare">$0.00</strong></div>
+                <div class="comp-item">Baseline Time: <strong id="comp-base-dur">0 min</strong></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Interactive Map Wrapper -->
+        <div class="map-wrapper">
+          <div class="map-overlay-instructions">
+            <span><span class="legend-dot green"></span> Pickup (Green)</span>
+            <span>&bull;</span>
+            <span><span class="legend-dot red"></span> Dropoff (Red)</span>
+            <span>&bull;</span>
+            <span>Drag markers or click map to trace routes</span>
+          </div>
+          <div id="map"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 2: CRISP-DM Framework & Model Analytics View -->
+    <section id="crisp-view" class="view-section">
+      <div class="crisp-header">
+        <h1>CRISP-DM Data Science Framework</h1>
+        <p>Comprehensive end-to-end documentation across all 6 phases of the Cross-Industry Standard Process for Data Mining.</p>
+      </div>
+
+      <!-- 6 Phases Grid -->
+      <div class="crisp-phases-grid">
+        <!-- Phase 1 -->
+        <div class="phase-card">
+          <div class="phase-num">Phase 1</div>
+          <div class="phase-title">Business Understanding</div>
+          <div class="phase-desc">
+            Formulate high-precision regression models to estimate trip duration and fare charges for urban passengers, fleet dispatchers, and ride-hailing algorithms. Key business KPIs include minimizing customer fare disputes and achieving RMSLE below 0.25.
+          </div>
+          <div class="phase-tags">
+            <span class="phase-tag">KPI: RMSLE &lt; 0.25</span>
+            <span class="phase-tag">ETA Reliability</span>
+            <span class="phase-tag">Dynamic Surcharge</span>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase-card">
+          <div class="phase-num">Phase 2</div>
+          <div class="phase-title">Data Understanding</div>
+          <div class="phase-desc">
+            Acquired 74,800+ real records from the Kaggle NYC Taxi challenge repository. Explored coordinate distributions, temporal density across 24 hours, fare skews, and identified critical geospatial boundary constraints.
+          </div>
+          <div class="phase-tags">
+            <span class="phase-tag">74.8k Records</span>
+            <span class="phase-tag">Geospatial Bounding</span>
+            <span class="phase-tag">Temporal Analysis</span>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase-card">
+          <div class="phase-num">Phase 3</div>
+          <div class="phase-title">Data Preparation</div>
+          <div class="phase-desc">
+            Eliminated invalid coordinates and zero-distance outliers. Engineered 23 high-impact features including Haversine and Manhattan distances, compass bearing, distances to JFK, LGA, Times Square, and Wall Street, alongside rush-hour indicators.
+          </div>
+          <div class="phase-tags">
+            <span class="phase-tag">Haversine & Manhattan</span>
+            <span class="phase-tag">Airport Hub Distances</span>
+            <span class="phase-tag">Rush-Hour Flags</span>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="phase-card">
+          <div class="phase-num">Phase 4</div>
+          <div class="phase-title">Modeling</div>
+          <div class="phase-desc">
+            Constructed dual LightGBM Gradient Boosted Decision Tree models with log1p target transformations to optimize directly for RMSLE and enforce strictly positive predictions, trained alongside a standardized Ridge Regression baseline.
+          </div>
+          <div class="phase-tags">
+            <span class="phase-tag">LightGBM Trees</span>
+            <span class="phase-tag">log1p Transform</span>
+            <span class="phase-tag">Ridge Baseline</span>
+          </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="phase-card">
+          <div class="phase-num">Phase 5</div>
+          <div class="phase-title">Evaluation</div>
+          <div class="phase-desc">
+            Rigorous validation on held-out test splits. LightGBM achieved a 51.5% reduction in Fare RMSE and 52.9% reduction in Duration RMSE over baseline, with 93.2% of fare predictions within $5 of actuals and 99.1% of trip ETAs within 5 minutes.
+          </div>
+          <div class="phase-tags">
+            <span class="phase-tag">51.5% RMSE Gain</span>
+            <span class="phase-tag">R² = 0.858 (Fare)</span>
+            <span class="phase-tag">R² = 0.910 (Duration)</span>
+          </div>
+        </div>
+
+        <!-- Phase 6 -->
+        <div class="phase-card">
+          <div class="phase-num">Phase 6</div>
+          <div class="phase-title">Deployment</div>
+          <div class="phase-desc">
+            Shipped production REST microservices powered by FastAPI and Uvicorn. Fronted by an interactive Leaflet.js dashboard with turn-by-turn road routing, draggable coordinate pins, preset journeys, and live model comparison.
+          </div>
+          <div class="phase-tags">
+            <span class="phase-tag">FastAPI Backend</span>
+            <span class="phase-tag">Leaflet.js UI</span>
+            <span class="phase-tag">OSRM Routing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metrics Scorecard & Feature Importance -->
+      <div class="analytics-two-col">
+        
+        <!-- Scorecard Card -->
+        <div class="card">
+          <div class="card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
+            Model Performance Comparison (Validation Set)
+          </div>
+          <table class="metrics-table">
+            <thead>
+              <tr>
+                <th>Evaluation Metric</th>
+                <th>Baseline (Ridge)</th>
+                <th>LightGBM (Ours)</th>
+                <th>Improvement</th>
+              </tr>
+            </thead>
+            <tbody id="metrics-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+          <div style="margin-top: 1rem; font-size: 0.75rem; color: var(--text-secondary);">
+            * Official Kaggle Metric: RMSLE (Root Mean Squared Logarithmic Error). Log target transformation optimizes directly for this metric.
+          </div>
+        </div>
+
+        <!-- Feature Importance Card -->
+        <div class="card">
+          <div class="card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            Top Predictive Features (Gain Importance)
+          </div>
+          <div id="importance-container" class="importance-bars">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Dataset Highlights Summary -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          Dataset & Spatial Distribution Insights
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center;">
+          <div class="metric-box">
+            <div class="metric-label">Cleaned Training Records</div>
+            <div id="eda-total-records" class="metric-value">72,635</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Average NYC Taxi Fare</div>
+            <div id="eda-mean-fare" class="metric-value">$11.22</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Average Trip Distance</div>
+            <div id="eda-mean-distance" class="metric-value">2.07 mi</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Peak Pickup Volume</div>
+            <div id="eda-peak-hour" class="metric-value">18:00 (Rush)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual EDA Gallery -->
+      <div class="card">
+        <div class="card-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          Exploratory Data Analysis Gallery
+        </div>
+        <div class="eda-gallery-grid">
+          <div class="eda-plot-card">
+            <img src="/plots/distance_vs_fare.png" alt="Distance vs Fare Amount" />
+            <div class="eda-plot-caption">Trip Distance vs Fare Amount with Rush-Hour Distinction</div>
+          </div>
+          <div class="eda-plot-card">
+            <img src="/plots/fare_distribution.png" alt="Fare Amount Distribution" />
+            <div class="eda-plot-caption">NYC Taxi Fare Distribution ($ USD) with Mean and Median</div>
+          </div>
+          <div class="eda-plot-card">
+            <img src="/plots/hourly_pickups.png" alt="Hourly Pickups Distribution" />
+            <div class="eda-plot-caption">Hourly Volume Across 24-Hour Period with Rush Hours Highlighted</div>
+          </div>
+          <div class="eda-plot-card">
+            <img src="/plots/correlation_matrix.png" alt="Feature Correlation Matrix" />
+            <div class="eda-plot-caption">Correlation Matrix of Distance, Coordinates, and Targets</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Leaflet JS & App Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="/static/js/map.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

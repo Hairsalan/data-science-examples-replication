@@ -1,0 +1,12 @@
+{
+  "total_records": 72635,
+  "mean_fare": 11.22,
+  "median_fare": 8.5,
+  "std_fare": 9.26,
+  "mean_distance_miles": 2.07,
+  "median_distance_miles": 1.35,
+  "mean_duration_minutes": 7.6,
+  "peak_pickup_hour": 18,
+  "rush_hour_pct": 26.7,
+  "weekend_pct": 28.3
+}
