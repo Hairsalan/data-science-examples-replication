@@ -1,0 +1,538 @@
+{
+  "projects": [
+    {
+      "id": "proj-inbox",
+      "name": "Inbox",
+      "color": "#6366f1",
+      "icon": "Inbox",
+      "isDefault": true,
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "proj-work",
+      "name": "Work & Product",
+      "color": "#3b82f6",
+      "icon": "Briefcase",
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "proj-design",
+      "name": "Design System",
+      "color": "#ec4899",
+      "icon": "Palette",
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "proj-launch",
+      "name": "v2.0 Launch",
+      "color": "#10b981",
+      "icon": "Rocket",
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "proj-personal",
+      "name": "Personal & Habits",
+      "color": "#f59e0b",
+      "icon": "User",
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    }
+  ],
+  "tags": [
+    {
+      "id": "tag-bug",
+      "name": "Bug",
+      "color": "#ef4444"
+    },
+    {
+      "id": "tag-feat",
+      "name": "Feature",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "tag-design",
+      "name": "Design",
+      "color": "#ec4899"
+    },
+    {
+      "id": "tag-urgent",
+      "name": "Urgent",
+      "color": "#f97316"
+    },
+    {
+      "id": "tag-refactor",
+      "name": "Refactor",
+      "color": "#8b5cf6"
+    },
+    {
+      "id": "tag-docs",
+      "name": "Docs",
+      "color": "#14b8a6"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task-1",
+      "title": "Design token audit and dark mode contrast check",
+      "description": "Verify all color tokens meet WCAG 2.1 AAA accessibility contrast standards in both light and dark modes.\n\n- Check text against background `zinc-900`\n- Ensure focus rings are visible\n- Test high contrast border states",
+      "status": "in_progress",
+      "priority": "P1",
+      "dueDate": "2026-09-14",
+      "estimatedMinutes": 45,
+      "projectId": "proj-design",
+      "orderIndex": 0,
+      "isPinned": true,
+      "createdAt": "2026-09-12T04:37:26.636Z",
+      "updatedAt": "2026-09-14T04:37:26.636Z",
+      "completedAt": null
+    },
+    {
+      "id": "task-2",
+      "title": "Implement drag-and-drop Kanban state sync",
+      "description": "Allow tasks to be seamlessly dragged across columns with optimistic UI response and server synchronization.",
+      "status": "done",
+      "priority": "P1",
+      "dueDate": "2026-09-13",
+      "estimatedMinutes": 60,
+      "projectId": "proj-work",
+      "orderIndex": 0,
+      "isPinned": false,
+      "createdAt": "2026-09-11T04:37:26.636Z",
+      "updatedAt": "2026-09-14T04:37:26.636Z",
+      "completedAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "task-3",
+      "title": "Add integrated Pomodoro focus timer with Web Audio bells",
+      "description": "Build a focus timer docked in the sidebar that tracks session intervals and sounds a gentle chime on completion.",
+      "status": "in_progress",
+      "priority": "P2",
+      "dueDate": "2026-09-14",
+      "estimatedMinutes": 30,
+      "projectId": "proj-work",
+      "orderIndex": 1,
+      "isPinned": true,
+      "createdAt": "2026-09-13T04:37:26.636Z",
+      "updatedAt": "2026-09-14T04:37:26.636Z",
+      "completedAt": null
+    },
+    {
+      "id": "task-4",
+      "title": "Draft release notes and product changelog for v2.0",
+      "description": "Highlight key improvements: speed boost, command palette (`Ctrl+K`), keyboard shortcuts, and confetti animations.",
+      "status": "todo",
+      "priority": "P2",
+      "dueDate": "2026-09-15",
+      "estimatedMinutes": 40,
+      "projectId": "proj-launch",
+      "orderIndex": 0,
+      "isPinned": false,
+      "createdAt": "2026-09-14T04:37:26.636Z",
+      "updatedAt": "2026-09-14T04:37:26.636Z",
+      "completedAt": null
+    },
+    {
+      "id": "task-5",
+      "title": "Investigate memory leak in websocket event listeners",
+      "description": "Profile heap allocation when rapidly unmounting real-time dashboard listeners.\n\n```ts\n// Ensure listeners are unregistered on cleanup:\nuseEffect(() => {\n  return () => socket.off(\"update\");\n}, []);\n```",
+      "status": "in_review",
+      "priority": "P1",
+      "dueDate": "2026-09-14",
+      "estimatedMinutes": 90,
+      "projectId": "proj-work",
+      "orderIndex": 0,
+      "isPinned": false,
+      "createdAt": "2026-09-12T04:37:26.636Z",
+      "updatedAt": "2026-09-14T04:37:26.636Z",
+      "completedAt": null
+    },
+    {
+      "id": "task-6",
+      "title": "Morning 5km run and hydration streak",
+      "description": "Track daily cardio routine before sprint kickoff.",
+      "status": "done",
+      "priority": "P3",
+      "dueDate": "2026-09-14",
+      "estimatedMinutes": 30,
+      "projectId": "proj-personal",
+      "orderIndex": 1,
+      "isPinned": false,
+      "createdAt": "2026-09-14T04:37:26.636Z",
+      "updatedAt": "2026-09-14T04:37:26.636Z",
+      "completedAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "task-7",
+      "title": "Read System Design chapter 4: Distributed Caching",
+      "description": "Focus on cache invalidation strategies and Redis cluster setups.",
+      "status": "todo",
+      "priority": "P4",
+      "dueDate": "2026-09-21",
+      "estimatedMinutes": 60,
+      "projectId": "proj-personal",
+      "orderIndex": 1,
+      "isPinned": false,
+      "createdAt": "2026-09-14T04:37:26.636Z",
+      "updatedAt": "2026-09-14T04:37:26.636Z",
+      "completedAt": null
+    },
+    {
+      "id": "task-a072e6a3",
+      "title": "d",
+      "description": "dased",
+      "status": "done",
+      "priority": "P3",
+      "dueDate": null,
+      "estimatedMinutes": null,
+      "projectId": "proj-inbox",
+      "orderIndex": 2,
+      "isPinned": false,
+      "createdAt": "2026-09-14T05:05:52.629Z",
+      "updatedAt": "2026-09-14T05:05:59.894Z",
+      "completedAt": "2026-09-14T05:05:59.894Z"
+    },
+    {
+      "id": "task-4b80b413",
+      "title": "Go to gas station",
+      "description": "Go to ",
+      "status": "done",
+      "priority": "P3",
+      "dueDate": null,
+      "estimatedMinutes": null,
+      "projectId": "proj-inbox",
+      "orderIndex": 2,
+      "isPinned": false,
+      "createdAt": "2026-09-14T05:06:14.655Z",
+      "updatedAt": "2026-09-14T05:06:39.149Z",
+      "completedAt": "2026-09-14T05:06:39.149Z"
+    },
+    {
+      "id": "task-9459d05d",
+      "title": "Go to store",
+      "description": "",
+      "status": "done",
+      "priority": "P3",
+      "dueDate": null,
+      "estimatedMinutes": null,
+      "projectId": "proj-inbox",
+      "orderIndex": 2,
+      "isPinned": false,
+      "createdAt": "2026-09-14T05:08:51.729Z",
+      "updatedAt": "2026-09-14T05:08:53.109Z",
+      "completedAt": "2026-09-14T05:08:53.109Z"
+    }
+  ],
+  "subtasks": [
+    {
+      "id": "sub-1",
+      "taskId": "task-1",
+      "title": "Audit primary palette (#6366f1)",
+      "isCompleted": true,
+      "orderIndex": 0,
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "sub-2",
+      "taskId": "task-1",
+      "title": "Test dark slate background contrast",
+      "isCompleted": true,
+      "orderIndex": 1,
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "sub-3",
+      "taskId": "task-1",
+      "title": "Fix P1 badge border luminance",
+      "isCompleted": false,
+      "orderIndex": 2,
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "sub-4",
+      "taskId": "task-3",
+      "title": "Web Audio API oscillator setup",
+      "isCompleted": true,
+      "orderIndex": 0,
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "sub-5",
+      "taskId": "task-3",
+      "title": "25m work / 5m break interval loop",
+      "isCompleted": true,
+      "orderIndex": 1,
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "sub-6",
+      "taskId": "task-3",
+      "title": "Docking controls in sidebar",
+      "isCompleted": false,
+      "orderIndex": 2,
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    }
+  ],
+  "taskTags": [
+    {
+      "taskId": "task-1",
+      "tagId": "tag-design"
+    },
+    {
+      "taskId": "task-1",
+      "tagId": "tag-urgent"
+    },
+    {
+      "taskId": "task-2",
+      "tagId": "tag-feat"
+    },
+    {
+      "taskId": "task-3",
+      "tagId": "tag-feat"
+    },
+    {
+      "taskId": "task-4",
+      "tagId": "tag-docs"
+    },
+    {
+      "taskId": "task-5",
+      "tagId": "tag-bug"
+    },
+    {
+      "taskId": "task-5",
+      "tagId": "tag-urgent"
+    }
+  ],
+  "activityLogs": [
+    {
+      "id": "a006a7ac-693b-45b9-940f-57042984405e",
+      "taskId": "task-6ed4461e",
+      "taskTitle": "Automated Test Task 1",
+      "action": "deleted",
+      "details": "Task deleted",
+      "createdAt": "2026-09-14T05:14:00.043Z"
+    },
+    {
+      "id": "d8aab8c7-0249-40df-bac0-3c68d5a6ad64",
+      "taskId": "task-6ed4461e",
+      "taskTitle": "Automated Test Task 1",
+      "action": "completed",
+      "details": "Task completed",
+      "createdAt": "2026-09-14T05:14:00.034Z"
+    },
+    {
+      "id": "64049d82-7501-43e5-a905-d0280600a0db",
+      "taskId": "task-6ed4461e",
+      "taskTitle": "Automated Test Task 1",
+      "action": "status_changed",
+      "details": "Status changed to in_progress",
+      "createdAt": "2026-09-14T05:14:00.024Z"
+    },
+    {
+      "id": "b545e9e8-bf04-4f17-91bf-ad96809f39c0",
+      "taskId": "task-6ed4461e",
+      "taskTitle": "Automated Test Task 1",
+      "action": "priority_changed",
+      "details": "Priority changed to P2",
+      "createdAt": "2026-09-14T05:14:00.024Z"
+    },
+    {
+      "id": "22da0eb0-1a69-403d-9b96-2201b21c02d6",
+      "taskId": "task-6ed4461e",
+      "taskTitle": "Automated Test Task 1",
+      "action": "created",
+      "details": "Task created",
+      "createdAt": "2026-09-14T05:14:00.015Z"
+    },
+    {
+      "id": "f881ce19-53dc-4ed6-9605-2254fe7839af",
+      "taskId": "task-9459d05d",
+      "taskTitle": "Go to store",
+      "action": "completed",
+      "details": "Task completed",
+      "createdAt": "2026-09-14T05:08:53.109Z"
+    },
+    {
+      "id": "46233b66-0b58-4713-a4fb-4767f5212a16",
+      "taskId": "task-9459d05d",
+      "taskTitle": "Go to store",
+      "action": "created",
+      "details": "Task created",
+      "createdAt": "2026-09-14T05:08:51.729Z"
+    },
+    {
+      "id": "fc821f82-e068-4b47-b085-5bd9f5305c8f",
+      "taskId": "task-4b80b413",
+      "taskTitle": "Go to gas station",
+      "action": "completed",
+      "details": "Task completed",
+      "createdAt": "2026-09-14T05:06:39.149Z"
+    },
+    {
+      "id": "25677fb4-3f42-479d-ad9a-77fcee6094ee",
+      "taskId": "task-4b80b413",
+      "taskTitle": "Go to gas station",
+      "action": "created",
+      "details": "Task created",
+      "createdAt": "2026-09-14T05:06:14.655Z"
+    },
+    {
+      "id": "5cccd443-2be1-472b-bdad-35f7bad36742",
+      "taskId": "task-a072e6a3",
+      "taskTitle": "d",
+      "action": "completed",
+      "details": "Task completed",
+      "createdAt": "2026-09-14T05:05:59.894Z"
+    },
+    {
+      "id": "8a744d26-ce21-433b-9280-92d9b4769a2a",
+      "taskId": "task-a072e6a3",
+      "taskTitle": "d",
+      "action": "created",
+      "details": "Task created",
+      "createdAt": "2026-09-14T05:05:52.629Z"
+    },
+    {
+      "id": "fa3c7886-2964-4002-8f2e-65a8f766d04a",
+      "taskId": "task-41e08e28",
+      "taskTitle": "Automated Test Task 1",
+      "action": "deleted",
+      "details": "Task deleted",
+      "createdAt": "2026-09-14T05:00:30.528Z"
+    },
+    {
+      "id": "7ad375a4-795b-4ebd-afb6-128f140e22ea",
+      "taskId": "task-41e08e28",
+      "taskTitle": "Automated Test Task 1",
+      "action": "completed",
+      "details": "Task completed",
+      "createdAt": "2026-09-14T05:00:30.517Z"
+    },
+    {
+      "id": "d112c436-1832-49bb-83bb-aca10e611acb",
+      "taskId": "task-41e08e28",
+      "taskTitle": "Automated Test Task 1",
+      "action": "status_changed",
+      "details": "Status changed to in_progress",
+      "createdAt": "2026-09-14T05:00:30.505Z"
+    },
+    {
+      "id": "4f3473b5-08b0-4562-8316-a6e0bdd17f04",
+      "taskId": "task-41e08e28",
+      "taskTitle": "Automated Test Task 1",
+      "action": "priority_changed",
+      "details": "Priority changed to P2",
+      "createdAt": "2026-09-14T05:00:30.505Z"
+    },
+    {
+      "id": "71bf2b2f-7301-4dfa-96a2-025cfa5d52bf",
+      "taskId": "task-41e08e28",
+      "taskTitle": "Automated Test Task 1",
+      "action": "created",
+      "details": "Task created",
+      "createdAt": "2026-09-14T05:00:30.498Z"
+    },
+    {
+      "id": "a87fdc4f-c674-4de2-8fdd-7f2b20c107e6",
+      "taskId": "task-3a6944ab",
+      "taskTitle": "Automated Test Task 1",
+      "action": "deleted",
+      "details": "Task deleted",
+      "createdAt": "2026-09-14T05:00:02.890Z"
+    },
+    {
+      "id": "6eb5d638-4b05-45c6-9832-9325e9518917",
+      "taskId": "task-3a6944ab",
+      "taskTitle": "Automated Test Task 1",
+      "action": "completed",
+      "details": "Task completed",
+      "createdAt": "2026-09-14T05:00:02.881Z"
+    },
+    {
+      "id": "48ac5a31-4d78-46fd-a197-883fa2bdad8d",
+      "taskId": "task-3a6944ab",
+      "taskTitle": "Automated Test Task 1",
+      "action": "status_changed",
+      "details": "Status changed to in_progress",
+      "createdAt": "2026-09-14T05:00:02.870Z"
+    },
+    {
+      "id": "6139d85d-79c0-4f67-8307-7b58be31a334",
+      "taskId": "task-3a6944ab",
+      "taskTitle": "Automated Test Task 1",
+      "action": "priority_changed",
+      "details": "Priority changed to P2",
+      "createdAt": "2026-09-14T05:00:02.870Z"
+    },
+    {
+      "id": "719fcf9d-95c4-48a3-acd6-065572936622",
+      "taskId": "task-3a6944ab",
+      "taskTitle": "Automated Test Task 1",
+      "action": "created",
+      "details": "Task created",
+      "createdAt": "2026-09-14T05:00:02.864Z"
+    },
+    {
+      "id": "e7fb3637-d09b-479f-a609-e6327fc49233",
+      "taskId": "task-9aacb5bc",
+      "taskTitle": "Automated Test Task 1",
+      "action": "deleted",
+      "details": "Task deleted",
+      "createdAt": "2026-09-14T04:54:34.436Z"
+    },
+    {
+      "id": "5979f678-69c7-4915-bd3d-abf542867704",
+      "taskId": "task-9aacb5bc",
+      "taskTitle": "Automated Test Task 1",
+      "action": "completed",
+      "details": "Task completed",
+      "createdAt": "2026-09-14T04:54:34.427Z"
+    },
+    {
+      "id": "0eb73017-781a-444c-ad72-ff6ad7e56798",
+      "taskId": "task-9aacb5bc",
+      "taskTitle": "Automated Test Task 1",
+      "action": "status_changed",
+      "details": "Status changed to in_progress",
+      "createdAt": "2026-09-14T04:54:34.416Z"
+    },
+    {
+      "id": "016c49b1-19af-4fbb-ac21-9d439bc82756",
+      "taskId": "task-9aacb5bc",
+      "taskTitle": "Automated Test Task 1",
+      "action": "priority_changed",
+      "details": "Priority changed to P2",
+      "createdAt": "2026-09-14T04:54:34.416Z"
+    },
+    {
+      "id": "9e9e5576-02b4-4344-9175-f82fa209297b",
+      "taskId": "task-9aacb5bc",
+      "taskTitle": "Automated Test Task 1",
+      "action": "created",
+      "details": "Task created",
+      "createdAt": "2026-09-14T04:54:34.406Z"
+    },
+    {
+      "id": "60bb2997-cb7d-45d9-a830-da1fb96a055b",
+      "taskId": "task-2",
+      "taskTitle": "Implement drag-and-drop Kanban state sync",
+      "action": "completed",
+      "details": "Task marked as completed",
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "b10d5249-5cbd-4da2-b0db-9445ce95dcac",
+      "taskId": "task-6",
+      "taskTitle": "Morning 5km run and hydration streak",
+      "action": "completed",
+      "details": "Task marked as completed",
+      "createdAt": "2026-09-14T04:37:26.636Z"
+    },
+    {
+      "id": "a212963c-9463-489e-9e34-544c3d91f844",
+      "taskId": "task-1",
+      "taskTitle": "Design token audit and dark mode contrast check",
+      "action": "created",
+      "details": "Created task in Design System",
+      "createdAt": "2026-09-12T04:37:26.636Z"
+    }
+  ]
+}
